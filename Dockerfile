@@ -8,6 +8,7 @@ RUN apt-get -y install curl wget language-pack-en
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_CONFIG="template"
+ENV SRV_ADR="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
 ENV UID=99
 ENV GID=100
 
