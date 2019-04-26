@@ -12,7 +12,7 @@ ENV SRV_ADR="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/
 ENV UID=99
 ENV GID=100
 ENV SERVER_KEY="template"
-ENV RCON_PWD="template"
+ENV START_VARS="template"
 
 RUN mkdir $DATA_DIR
 RUN mkdir $SERVER_DIR
