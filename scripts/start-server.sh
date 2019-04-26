@@ -22,8 +22,8 @@ else
   sleep infinity
 fi
 
-if [ ! -d "${SERVER_DIR}/cfx-server-data" ]; then
-  echo "---CFX-SERVER-DATA not found, downloading...---"
+if [ ! -d "${SERVER_DIR}/server-data" ]; then
+  echo "---SERVER-DATA not found, downloading...---"
   cd ${SERVER_DIR}
   mkdir server-data
   cd ${SERVER_DIR}/server-data
@@ -32,7 +32,7 @@ if [ ! -d "${SERVER_DIR}/cfx-server-data" ]; then
   mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/server-data/resources
   rm server-data.zip && rm -R cfx-server-data-master/
 else
-  echo "---CFX-SERVER-DATA found, updating...---"
+  echo "---SERVER-DATA found, updating...---"
   cd ${SERVER_DIR}/server-data
   wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
   unzip server-data.zip
