@@ -45,4 +45,5 @@ chmod -R 770 ${DATA_DIR}
 sleep infinity
 
 echo "---Starting Server---"
-bash ${SERVER_DIR}/run.sh +exec ${SERVER_DIR}/server-data/${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} ${START_VARS}
+cd ${SERVER_DIR}
+bash run.sh +exec ${SERVER_DIR}/server-data/${GAME_CONFIG}
