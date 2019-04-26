@@ -47,6 +47,6 @@ if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
 fi
 chmod -R 770 ${DATA_DIR}
 
-${SERVER_DIR}/run.sh +exec ${SERVER_DIR}/server.cfg +sv_licenseKey ${SERVER_KEY}
+${SERVER_DIR}/run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
 
 sleep infinity
