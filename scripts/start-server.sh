@@ -16,7 +16,7 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
   tar -xf $LAT_V
   mv ${SERVER_DIR}/$LAT_V ${DATA_DIR}/fx.tar.xz-$LAT_V
 elif [ "$LAT_V" == "$CUR_V" ]; then
-  echo "---Teeworlds Version up-to-date---"
+  echo "---FiveM Version up-to-date---"
 else
   echo "---Something went wrong, putting server in sleep mode---"
   sleep infinity
