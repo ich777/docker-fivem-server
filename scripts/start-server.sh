@@ -2,8 +2,9 @@
 CUR_V="$(find -name fx.tar.xz-[^extended]* | cut -d '-' -f 2,3)"
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
 
+echo "---Version Check---"
 if [ -z "$CUR_V" ]; then
-  echo "---FiveM not found!---"
+  echo "---FiveM not found, downloading!---"
   cd ${SERVER_DIR}
   wget -qO $LAT_V "${SRV_ADR}$LAT_V/fx.tar.xz"
   tar -xf $LAT_V
@@ -40,13 +41,15 @@ else
   rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
-if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
+echo "---Prepare Server---"
+if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
   echo "---No server.cfg found, downloading...---"
   cd ${SERVER_DIR}/server-data
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 770 ${DATA_DIR}
 
+echo "---Starting Server---"
 ${SERVER_DIR}/run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
 
 sleep infinity
