@@ -43,6 +43,6 @@ fi
 chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Server---"
-${SERVER_DIR}/run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
+exec ${SERVER_DIR}/run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
 
 sleep infinity
