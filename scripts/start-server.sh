@@ -46,4 +46,4 @@ sleep infinity
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-bash run.sh +exec ${SERVER_DIR}/server-data/${GAME_CONFIG}
+./run.sh +exec ${GAME_CONFIG} ${START_VARS}
