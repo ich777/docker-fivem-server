@@ -43,6 +43,6 @@ if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 
-${SERVER_DIR}/run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
+${SERVER_DIR}/run.sh +exec ${SERVER_DIR}/server.cfg +sv_licenseKey ${SERVER_KEY}
 
 sleep infinity
