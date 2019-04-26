@@ -46,6 +46,6 @@ chmod -R 770 ${DATA_DIR}
 
 
 cd ${SERVER_DIR}
-./run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY} +sv_hostname $HOSTNAME +rcon_password ${RCON_PWD}
+./run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY}
 
 sleep infinity
