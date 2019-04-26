@@ -22,7 +22,7 @@ else
   sleep infinity
 fi
 
-if [ ! -d ${SERVER_DIR}/cfx-server-data ]; then
+if [ ! -d "${SERVER_DIR}/cfx-server-data" ]; then
   echo "---CFX-SERVER-DATA not found, downloading...---"
   cd ${SERVER_DIR}
   wget -O server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
@@ -37,12 +37,15 @@ else
   mv ${SERVER_DIR}/cfx-server-data-master ${SERVER_DIR}/cfx-server-data
 fi
 
-if [ ! -f ${SERVER_DIR}/server.cfg ]; then
-   cd ${SERVER_DIR}
-   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
+if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
+  echo "---No server.cfg found, downloading...---"
+  cd ${SERVER_DIR}
+  wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 770 ${DATA_DIR}
 
 
 cd ${SERVER_DIR}
 ./run.sh +exec server.cfg +sv_licenseKey ${SERVER_KEY} +sv_hostname '"'$HOSTNAME'"' +rcon_password ${RCON_PWD}
+
+sleep infinity
