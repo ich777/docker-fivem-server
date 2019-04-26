@@ -7,14 +7,14 @@ if [ -z "$CUR_V" ]; then
   cd ${SERVER_DIR}
   wget -qO $LAT_V "${SRV_ADR}$LAT_V/fx.tar.xz"
   tar -xf $LAT_V
-  mv ${SERVER_DIR}/$LAT_V ${DATA_DIR}/fx.tar.xz-$LAT_V
+  mv ${SERVER_DIR}/$LAT_V ${SERVER_DIR}/fx.tar.xz-$LAT_V
 elif [ "$LAT_V" != "$CUR_V" ]; then
   echo "---Newer version found, installing!---"
-  rm ${DATA_DIR}/fx.tar.xz-$CUR_V
+  rm ${SERVER_DIR}/fx.tar.xz-$CUR_V
   cd ${SERVER_DIR}
   wget -qO $LAT_V "${SRV_ADR}$LAT_V/fx.tar.xz"
   tar -xf $LAT_V
-  mv ${SERVER_DIR}/$LAT_V ${DATA_DIR}/fx.tar.xz-$LAT_V
+  mv ${SERVER_DIR}/$LAT_V ${SERVER_DIR}/fx.tar.xz-$LAT_V
 elif [ "$LAT_V" == "$CUR_V" ]; then
   echo "---FiveM Version up-to-date---"
 else
