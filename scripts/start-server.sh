@@ -32,13 +32,6 @@ if [ ! -d "${SERVER_DIR}/server-data" ]; then
   unzip -q server-data.zip
   mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/server-data/resources
   rm server-data.zip && rm -R cfx-server-data-master/
-else
-  echo "---SERVER-DATA found, updating...---"
-  cd ${SERVER_DIR}/server-data
-  wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
-  unzip -q server-data.zip
-  mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/server-data/resources
-  rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
 echo "---Prepare Server---"
