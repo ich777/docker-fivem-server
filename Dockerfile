@@ -17,6 +17,7 @@ ENV HOSTNAME="template"
 
 RUN mkdir $DATA_DIR
 RUN mkdir $SERVER_DIR
+RUN mkdir $SERVER_DIR/cfx-server-data
 RUN useradd -d $DATA_DIR -s /bin/bash --uid $UID --gid $GID fivem
 RUN chown -R fivem $DATA_DIR
 
