@@ -35,14 +35,14 @@ else
   echo "---SERVER-DATA found, updating...---"
   cd ${SERVER_DIR}/server-data
   wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
-  unzip server-data.zip
+  unzip -q server-data.zip
   mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/server-data/resources
   rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
 if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
   echo "---No server.cfg found, downloading...---"
-  cd ${SERVER_DIR}
+  cd ${SERVER_DIR}/server-data
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 770 ${DATA_DIR}
