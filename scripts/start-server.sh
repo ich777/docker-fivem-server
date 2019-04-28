@@ -42,4 +42,9 @@ chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-exec ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
+screen -S FiveM -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
+echo "--------------------------------------------------"
+echo "       If you want to get detailed logs open      "
+echo "a console and type in 'screen -r' (without quotes)"
+echo "--------------------------------------------------"
+sleep infinity
