@@ -44,4 +44,4 @@ chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-./run.sh +exec ${GAME_CONFIG} ${START_VARS}
+./run.sh +exec +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS} ${GAME_CONFIG}
