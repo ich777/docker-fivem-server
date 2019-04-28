@@ -1,4 +1,7 @@
 #!/bin/bash
+
+sleep infinity
+
 CUR_V="$(find -name fx.tar.xz-[^extended]* | cut -d '-' -f 2,3)"
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
 
