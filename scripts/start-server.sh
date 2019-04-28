@@ -33,7 +33,7 @@ if [ ! -d "${SERVER_DIR}/resources" ]; then
 fi
 
 echo "---Prepare Server---"
-if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
+if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
   echo "---No server.cfg found, downloading...---"
   cd ${SERVER_DIR}
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
@@ -43,11 +43,3 @@ chmod -R 770 ${DATA_DIR}
 echo "---Starting Server---"
 cd ${SERVER_DIR}
 exec ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
-
-for i in 1 2 3 4 5; do
-   cmd & pids+=($!)
-done
-
-for pid in "${pids[@]}"; do
-   wait "$pid"
-done
