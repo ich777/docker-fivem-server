@@ -42,8 +42,6 @@ if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
 fi
 chmod -R 770 ${DATA_DIR}
 
-sleep infinity
-
 echo "---Starting Server---"
 cd ${SERVER_DIR}
 ./run.sh +exec ${GAME_CONFIG} ${START_VARS}
