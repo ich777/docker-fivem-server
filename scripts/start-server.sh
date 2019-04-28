@@ -28,7 +28,7 @@ if [ ! -d "${SERVER_DIR}/resources" ]; then
   cd ${SERVER_DIR}
   wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
   unzip -q server-data.zip
-  mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/resources
+  mv ${SERVER_DIR}/cfx-server-data-master/resources ${SERVER_DIR}/resources
   rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
