@@ -40,6 +40,9 @@ if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
 fi
 chmod -R 770 ${DATA_DIR}
 
+sleep infinity
+
+
 echo "---Starting Server---"
 cd ${SERVER_DIR}
 exec ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
@@ -53,4 +56,3 @@ for pid in ${pids[*]}; do
     wait $pid
 done
 
-sleep infinity
