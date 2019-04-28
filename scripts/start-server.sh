@@ -43,5 +43,14 @@ chmod -R 770 ${DATA_DIR}
 echo "---Starting Server---"
 cd ${SERVER_DIR}
 exec ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
+for i in $n_procs; do
+    ./procs[${i}] &
+    pids[${i}]=$!
+done
+
+# wait for all pids
+for pid in ${pids[*]}; do
+    wait $pid
+done
 
 sleep infinity
