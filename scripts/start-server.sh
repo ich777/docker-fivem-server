@@ -1,5 +1,5 @@
 #!/bin/bash
-CUR_V="$(find -name fx.tar.xz-[^extended]* | cut -d '-' -f 2,3)"
+CUR_V="$(find $DATA_DIR -name fx.tar.xz-[^extended]* | cut -d '-' -f 2,3)"
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
 
 echo "---Version Check---"
@@ -40,19 +40,14 @@ if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
 fi
 chmod -R 770 ${DATA_DIR}
 
-sleep infinity
-
-
 echo "---Starting Server---"
 cd ${SERVER_DIR}
 exec ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
-for i in $n_procs; do
-    ./procs[${i}] &
-    pids[${i}]=$!
+
+for i in 1 2 3 4 5; do
+   cmd & pids+=($!)
 done
 
-# wait for all pids
-for pid in ${pids[*]}; do
-    wait $pid
+for pid in "${pids[@]}"; do
+   wait "$pid"
 done
-
