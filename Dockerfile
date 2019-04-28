@@ -23,9 +23,9 @@ RUN ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
-#RUN chown -R fivem /opt/scripts
+RUN chown -R fivem /opt/scripts
 
-#USER fivem
+USER fivem
 
 #Server Start
 ENTRYPOINT ["/opt/scripts/start-server.sh"]
