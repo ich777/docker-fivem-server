@@ -26,25 +26,23 @@ else
   sleep infinity
 fi
 
-if [ ! -d "${SERVER_DIR}/server-data" ]; then
+if [ ! -d "${SERVER_DIR}/resources" ]; then
   echo "---SERVER-DATA not found, downloading...---"
   cd ${SERVER_DIR}
-  mkdir server-data
-  cd ${SERVER_DIR}/server-data
   wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
   unzip -q server-data.zip
-  mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/server-data/resources
+  mv ${SERVER_DIR}/server-data/cfx-server-data-master/resources ${SERVER_DIR}/resources
   rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
 echo "---Prepare Server---"
 if [ ! -f "${SERVER_DIR}/server-data/server.cfg" ]; then
   echo "---No server.cfg found, downloading...---"
-  cd ${SERVER_DIR}/server-data
+  cd ${SERVER_DIR}
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-./run.sh +exec +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS} ${GAME_CONFIG}
+./run.sh +exec ${GAME_CONFIG} +sv_licenseKey $SERVER_KEY +sv_hostname ${SRV_NAME} ${START_VARS}
