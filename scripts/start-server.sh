@@ -39,12 +39,11 @@ if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 770 ${DATA_DIR}
+echo "---Checking for old logs---"
+find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-screen -S FiveM -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
-echo "--------------------------------------------------"
-echo "       If you want to get detailed logs open      "
-echo "a console and type in 'screen -r' (without quotes)"
-echo "--------------------------------------------------"
-sleep infinity
+screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
+sleep 2
+tail -f ${SERVER_DIR}/masterLog.0
