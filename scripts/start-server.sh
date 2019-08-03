@@ -14,9 +14,7 @@ if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
     tar -xf fx.tar.xz
     sleep 2
     rm -R fx.tar.xz
-    if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
-    	touch ${SERVER_DIR}/fiveminstalled
-    fi
+    echo "---Installation of new 'fx.tar.xz' complete---"
 fi
 
 if [ -f ${SERVER_DIR}/fiveminstalled ]; then
@@ -34,6 +32,10 @@ if [ -f ${SERVER_DIR}/fiveminstalled ]; then
      else
      	echo "---No new 'fx.tar.xz' found---"
      fi
+fi
+
+if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
+	touch ${SERVER_DIR}/fiveminstalled
 fi
 
 if [ ! -d "${SERVER_DIR}/resources" ]; then
