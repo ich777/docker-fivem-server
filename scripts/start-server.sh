@@ -1,11 +1,12 @@
 #!/bin/bash
 if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
 	if [ ! -f ${SERVER_DIR}/fx.tar.xz ]; then
-    	echo "--------------------------------------------"
-		echo "---Please put the Server file 'fx.tar.xz'---"
-    	echo "---in the main directory and restart the----"
-    	echo "---Docker, putting Server into sleep mode---"
-    	echo "--------------------------------------------"
+    	echo "-------------------------------------------------------------------------"
+		echo "----------Please put the Server file 'fx.tar.xz' in the main-------------"
+        echo "-----------------directory, you can get it from:-------------------------"
+        echo "---https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/---"
+        echo "----------and restart the Docker, putting Server into sleep mode---------"
+    	echo "-------------------------------------------------------------------------"
 		sleep infinity
     fi
     echo "---File 'fx.tar.xz' found, installing...---"
