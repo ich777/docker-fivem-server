@@ -1,26 +1,38 @@
 #!/bin/bash
-CUR_V="$(find $DATA_DIR -name fx.tar.xz-[^extended]* | cut -d '-' -f 2,3)"
-LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
+if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
+	if [ ! -f ${SERVER_DIR}/fx.tar.xz ]; then
+    	echo "--------------------------------------------"
+		echo "---Please put the Server file 'fx.tar.xz'---"
+    	echo "---in the main directory and restart the----"
+    	echo "---Docker, putting Server into sleep mode---"
+    	echo "--------------------------------------------"
+		sleep infinity
+    fi
+    echo "---File 'fx.tar.xz' found, installing...---"
+    cd ${SERVER_DIR}
+    tar -xf fx.tar.xz
+    sleep 2
+    rm -R fx.tar.xz
+    if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
+    	touch ${SERVER_DIR}/fiveminstalled
+    fi
+fi
 
-echo "---Version Check---"
-if [ -z "$CUR_V" ]; then
-  echo "---FiveM not found, downloading!---"
-  cd ${SERVER_DIR}
-  wget -qO $LAT_V "${SRV_ADR}$LAT_V/fx.tar.xz"
-  tar -xf $LAT_V
-  mv ${SERVER_DIR}/$LAT_V ${DATA_DIR}/fx.tar.xz-$LAT_V
-elif [ "$LAT_V" != "$CUR_V" ]; then
-  echo "---Newer version found, installing!---"
-  rm ${DATA_DIR}/fx.tar.xz-$CUR_V
-  cd ${SERVER_DIR}
-  wget -qO $LAT_V "${SRV_ADR}$LAT_V/fx.tar.xz"
-  tar -xf $LAT_V
-  mv ${SERVER_DIR}/$LAT_V ${DATA_DIR}/fx.tar.xz-$LAT_V
-elif [ "$LAT_V" == "$CUR_V" ]; then
-  echo "---FiveM Version up-to-date---"
-else
-  echo "---Something went wrong, putting server in sleep mode---"
-  sleep infinity
+if [ -f ${SERVER_DIR}/fiveminstalled ]; then
+	echo "---Checking for new 'fx.tar.xz'---"
+	if [ -f ${SERVER_DIR}/fx.tar.xz ]; then
+    	echo "---New 'fx.tar.xz' found, installing...---"
+        cd ${SERVER_DIR}
+        tar -xf fx.tar.xz
+        sleep 2
+        rm -R fx.tar.xz
+        if [ ! -f ${SERVER_DIR}/fiveminstalled ]; then
+        	touch ${SERVER_DIR}/fiveminstalled
+        fi
+        echo "---Installation of new 'fx.tar.xz' complete---"
+     else
+     	echo "---No new 'fx.tar.xz' found---"
+     fi
 fi
 
 if [ ! -d "${SERVER_DIR}/resources" ]; then
@@ -41,6 +53,15 @@ fi
 chmod -R 770 ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
+
+if [ ! -f ${SERVER_DIR}/run.sh ]; then
+	echo "------------------------------------"
+	echo "---Something went wrong, couldn't---"
+    echo "---find run.sh in main directory----"
+    echo "---Putting server into sleep mode---"
+    echo "------------------------------------"
+    sleep infinity
+fi
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
