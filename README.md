@@ -13,7 +13,7 @@ Update Notice: Simply place the new fx.tar.xz in the main directory and it will 
 | --- | --- | --- |
 | SERVER_DIR | Folder for gamefile | /serverdata/serverfiles |
 | GAME_CONFIG | The name of your server configuration file | server.cfg |
-| SERVER_KEY | Place your server key obtained from: https://keymaster.fivem.net/ here | -key- |
+| SERVER_KEY | Place your server key obtained from: https://keymaster.fivem.net/ here | placeyourkeyhere |
 | START_VARS | Enter your extra startup variables here if needed | |
 | UID | User Identifier | 99 |
 | GID | Group Identifier | 100 |
