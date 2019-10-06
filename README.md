@@ -23,15 +23,15 @@ Update Notice: Simply restart the container and it will download the newest vers
 ## Run example
 ```
 docker run --name FiveM -d \
-	-p 30110:30110 -p 30120:30120 \
+    -p 30110:30110 -p 30120:30120 \
     -p 30110:30110/udp -p 30120:30120/udp \
-	--env 'GAME_CONFIG=server.cfg' \
-	--env 'SERVER_KEY=placeyourkeyhere' \
+    --env 'GAME_CONFIG=server.cfg' \
+    --env 'SERVER_KEY=placeyourkeyhere' \
     --env 'SRV_ADR=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/' \
-	--env 'UID=99' \
-	--env 'GID=100' \
-	--volume /mnt/user/appdata/fivem:/serverdata/serverfiles \
-	ich777/fivemserver
+    --env 'UID=99' \
+    --env 'GID=100' \
+    --volume /mnt/user/appdata/fivem:/serverdata/serverfiles \
+    ich777/fivemserver
 ```
 
 
