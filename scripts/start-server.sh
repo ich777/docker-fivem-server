@@ -1,6 +1,8 @@
 #!/bin/bash
 CUR_V="$(find ${SERVER_DIR} -name fiveminstalled-* | cut -d '-' -f 2,3)"
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
+echo "---Setting umask to ${UMASK}---"
+umask ${UMASK}
 
 if [ "${MANUAL_UPDATES}" == "true" ]; then
     if [ "$CUR_V" == "manual" ]; then
