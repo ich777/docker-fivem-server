@@ -126,19 +126,19 @@ else
     fi
 fi
 
-if [ ! -d "${SERVER_DIR}/resources" ]; then
-  echo "---SERVER-DATA not found, downloading...---"
+if [ ! -d "${DATA_DIR}/resources" ]; then
+  echo "---DATA_DIR not found, downloading...---"
   cd ${SERVER_DIR}
   wget -qO server-data.zip "http://github.com/citizenfx/cfx-server-data/archive/master.zip"
   unzip -q server-data.zip
-  mv ${SERVER_DIR}/cfx-server-data-master/resources ${SERVER_DIR}/resources
+  mv ${DATA_DIR}/cfx-server-data-master/resources ${DATA_DIR}/resources
   rm server-data.zip && rm -R cfx-server-data-master/
 fi
 
 echo "---Prepare Server---"
-if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
+if [ ! -f "${DATA_DIR}/server.cfg" ]; then
   echo "---No server.cfg found, downloading...---"
-  cd ${SERVER_DIR}
+  cd ${DATA_DIR}
   wget -qi server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
 chmod -R 777 ${DATA_DIR}
@@ -155,7 +155,7 @@ if [ ! -f ${SERVER_DIR}/run.sh ]; then
 fi
 
 echo "---Starting Server---"
-cd ${SERVER_DIR}
+cd ${DATA_DIR}
 screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
 sleep 2
 tail -f ${SERVER_DIR}/masterLog.0
