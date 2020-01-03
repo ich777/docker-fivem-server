@@ -1,9 +1,9 @@
-FROM ubuntu
+FROM ich777/debian-baseimage
 
-MAINTAINER ich777
+LABEL maintainer="admin@minenet.at"
 
-RUN apt-get update
-RUN apt-get -y install wget xz-utils unzip screen
+RUN apt-get update && \
+	apt-get -y install xz-utils unzip screen
 
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
@@ -16,16 +16,15 @@ ENV GID=100
 ENV SERVER_KEY="template"
 ENV START_VARS="template"
 
-RUN mkdir $DATA_DIR
-RUN mkdir $SERVER_DIR
-RUN useradd -d $SERVER_DIR -s /bin/bash --uid $UID --gid $GID fivem
-RUN chown -R fivem $DATA_DIR
-
-RUN ulimit -n 2048
+RUN mkdir $DATA_DIR && \
+	mkdir $SERVER_DIR && \
+	useradd -d $SERVER_DIR -s /bin/bash --uid $UID --gid $GID fivem && \
+	chown -R fivem $DATA_DIR && \
+	ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
-RUN chmod -R 770 /opt/scripts/
-RUN chown -R fivem /opt/scripts
+RUN chmod -R 770 /opt/scripts/ && \
+	chown -R fivem /opt/scripts
 
 USER fivem
 
