@@ -1,6 +1,7 @@
 #!/bin/bash
 CUR_V="$(find ${SERVER_DIR} -name fiveminstalled-* | cut -d '-' -f 2,3)"
-LAT_V="$(wget -q -O - ${SRV_ADR} | grep 'Parent directory/</a></td><td>-</td><td' | head | grep -Po '(?<=href=").{45}' |grep 1)"
+LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -d '-' -f 1 | cut -c3-)"
+DL_URL=${SRV_ADR}"$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -c3-)"
 echo "---Setting umask to ${UMASK}---"
 umask ${UMASK}
 
@@ -65,7 +66,7 @@ else
         elif [ "$LAT_V" != "" ]; then
             echo "---FiveM not found, downloading!---"
             cd ${SERVER_DIR}
-            if wget -q -nc --show-progress --progress=bar:force:noscroll ${SRV_ADR}$LAT_V/fx.tar.xz ; then
+            if wget -q -nc --show-progress --progress=bar:force:noscroll $DL_URL ; then
                   echo "---Download complete---"
             else
                   echo "---Something went wrong, can't download FiveM, putting server in sleep mode---"
@@ -111,7 +112,7 @@ else
                 rm ${SERVER_DIR}/fiveminstalled-*
             fi
             cd ${SERVER_DIR}
-            if wget -q -nc --show-progress --progress=bar:force:noscroll ${SRV_ADR}$LAT_V/fx.tar.xz ; then
+            if wget -q -nc --show-progress --progress=bar:force:noscroll $DL_URL ; then
                 echo "---Download complete---"
             else
                 echo "---Something went wrong, can't download FiveM, putting server in sleep mode---"
