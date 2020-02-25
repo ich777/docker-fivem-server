@@ -2,8 +2,6 @@
 CUR_V="$(find ${SERVER_DIR} -name fiveminstalled-* | cut -d '-' -f 2,3)"
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -d '-' -f 1 | cut -c3-)"
 DL_URL=${SRV_ADR}"$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -c3-)"
-echo "---Setting umask to ${UMASK}---"
-umask ${UMASK}
 
 if [ "${MANUAL_UPDATES}" == "true" ]; then
     if [ "$CUR_V" == "manual" ]; then
@@ -142,7 +140,7 @@ if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
   cd ${SERVER_DIR}
   wget -q -nc --show-progress --progress=bar:force:noscroll server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
 fi
-chmod -R 777 ${DATA_DIR}
+chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
