@@ -6,7 +6,7 @@ To run this container you must provide a valid Server Key (you can get them from
 
 Update Notice: Simply restart the container and it will download the newest version or if you set 'Manual Updates' to 'true' place the new fx.tar.xz in the main directory and restart the container.
 
->**CONSOLE:** Console: To connect to the console open up the terminal on the host machine and type in: 'docker exec -u fivem -ti [Name of your Container] screen -xS FiveM' (without quotes) to exit the screen session press CTRL+A and then CTRL+D or simply close the terminal window in the first place.
+>**CONSOLE:** To connect to the console open up the terminal on the host machine and type in: 'docker exec -u fivem -ti [Name of your Container] screen -xS FiveM' (without quotes) to exit the screen session press CTRL+A and then CTRL+D or simply close the terminal window in the first place.
 
 ## Env params
 | Name | Value | Example |
