@@ -135,10 +135,12 @@ if [ ! -d "${SERVER_DIR}/resources" ]; then
 fi
 
 echo "---Prepare Server---"
-if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
-  echo "---No server.cfg found, downloading...---"
-  cd ${SERVER_DIR}
-  wget -q -nc --show-progress --progress=bar:force:noscroll server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
+if [ ! -z "${GAME_CONFIG}" ]; then
+    if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
+        echo "---No server.cfg found, downloading...---"
+        cd ${SERVER_DIR}
+        wget -q -nc --show-progress --progress=bar:force:noscroll server.cfg "https://raw.githubusercontent.com/ich777/docker-fivem-server/master/configs/server.cfg"
+    fi
 fi
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
@@ -155,6 +157,10 @@ fi
 
 echo "---Starting Server---"
 cd ${SERVER_DIR}
-screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
+if [ -z "${GAME_CONFIG}" ]; then
+    screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
+else
+    screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
+fi
 sleep 2
 tail -f ${SERVER_DIR}/masterLog.0
