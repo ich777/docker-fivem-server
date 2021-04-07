@@ -6,7 +6,7 @@ To run this container you must provide a valid Server Key (you can get them from
 
 Update Notice: Simply restart the container and it will download the newest version or if you set 'Manual Updates' to 'true' place the new fx.tar.xz in the main directory and restart the container.
 
->**CONSOLE:** To connect to the console open up the terminal on the host machine and type in: 'docker exec -u fivem -ti [Name of your Container] screen -xS FiveM' (without quotes) to exit the screen session press CTRL+A and then CTRL+D or simply close the terminal window in the first place.
+**WEB CONSOLE:** You can connect to the FiveM console by opening your browser and go to HOSTIP:9016 (eg: 192.168.1.1:9016) or click on WebUI on the Docker page within Unraid.
 
 ## Env params
 | Name | Value | Example |
@@ -25,6 +25,7 @@ Update Notice: Simply restart the container and it will download the newest vers
 docker run --name FiveM -d \
     -p 30110:30110 -p 30120:30120 \
     -p 30110:30110/udp -p 30120:30120/udp \
+    -p 9016:8080 \
     --env 'GAME_CONFIG=server.cfg' \
     --env 'SERVER_KEY=placeyourkeyhere' \
     --env 'SRV_ADR=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/' \
