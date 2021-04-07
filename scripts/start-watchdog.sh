@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 30
 killpid="$(pidof ld-musl-x86_64.so.1)"
 while true
 do
