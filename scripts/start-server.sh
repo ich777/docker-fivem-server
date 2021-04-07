@@ -135,6 +135,10 @@ if [ ! -d "${SERVER_DIR}/resources" ]; then
 fi
 
 echo "---Prepare Server---"
+if [ ! -f ~/.screenrc ]; then
+    echo "defscrollback 30000
+bindkey \"^C\" echo 'Blocked. Please use to command \"quit\" to shutdown the server or close this window to exit the terminal.'" > ~/.screenrc
+fi
 if [ ! -z "${GAME_CONFIG}" ]; then
     if [ ! -f "${SERVER_DIR}/server.cfg" ]; then
         echo "---No server.cfg found, downloading...---"
@@ -163,4 +167,8 @@ else
     screen -S FiveM -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/run.sh +exec ${GAME_CONFIG} +sv_licenseKey ${SERVER_KEY} +sv_hostname ${SRV_NAME} ${START_VARS}
 fi
 sleep 2
+if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
+    /opt/scripts/start-gotty.sh 2>/dev/null &
+fi
+screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
 tail -f ${SERVER_DIR}/masterLog.0
