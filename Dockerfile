@@ -12,7 +12,7 @@ RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v
 
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
-ENV GAME_CONFIG="template"
+ENV GAME_CONFIG=""
 ENV SRV_ADR="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
 ENV MANUAL_UPDATES=""
 ENV ENABLE_WEBCONSOLE="true"
@@ -21,7 +21,7 @@ ENV UMASK=000
 ENV UID=99
 ENV GID=100
 ENV SERVER_KEY="template"
-ENV START_VARS="template"
+ENV START_VARS=""
 ENV DATA_PERM=770
 ENV USER="fivem"
 
