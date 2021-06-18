@@ -110,6 +110,7 @@ else
                 rm ${SERVER_DIR}/fiveminstalled-*
             fi
             cd ${SERVER_DIR}
+	    echo "---Attempting dwonload from $DL_URL---"
             if wget -q -nc --show-progress --progress=bar:force:noscroll $DL_URL ; then
                 echo "---Download complete---"
             else
