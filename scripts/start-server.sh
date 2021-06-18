@@ -1,10 +1,6 @@
 #!/bin/bash
 CUR_V="$(find ${SERVER_DIR} -name fiveminstalled-* | cut -d '-' -f 2,3)"
-<<<<<<< HEAD
 LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | tail -n -2 | tail -n -1 | grep -oP '(?<=\()[^\)]+')"
-=======
-LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -d '-' -f 1 | cut -c3-)"
->>>>>>> upstream/master
 DL_URL=${SRV_ADR}"$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | tail -n -2 | head -n -1 | cut -d '"' -f 2 | cut -c 2-)"
 
 if [ "${MANUAL_UPDATES}" == "true" ]; then
