@@ -1,7 +1,7 @@
 #!/bin/bash
 CUR_V="$(find ${SERVER_DIR} -name fiveminstalled-* | cut -d '-' -f 2,3)"
-LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -d '-' -f 1 | cut -c3-)"
-DL_URL=${SRV_ADR}"$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | head -n -1 | cut -d '"' -f 2 | cut -c3-)"
+LAT_V="$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | tail -n -2 | tail -n -1 | grep -oP '(?<=\()[^\)]+')"
+DL_URL=${SRV_ADR}"$(wget -q -O - ${SRV_ADR} | grep -B 1 'LATEST RECOMMENDED' | tail -n -2 | head -n -1 | cut -d '"' -f 2 | cut -c 2-)"
 
 if [ "${MANUAL_UPDATES}" == "true" ]; then
     if [ "$CUR_V" == "manual" ]; then
@@ -64,6 +64,7 @@ else
         elif [ "$LAT_V" != "" ]; then
             echo "---FiveM not found, downloading!---"
             cd ${SERVER_DIR}
+            echo "---Attempting dwonload from $DL_URL---"
             if wget -q -nc --show-progress --progress=bar:force:noscroll $DL_URL ; then
                   echo "---Download complete---"
             else
@@ -110,6 +111,7 @@ else
                 rm ${SERVER_DIR}/fiveminstalled-*
             fi
             cd ${SERVER_DIR}
+            echo "---Attempting dwonload from $DL_URL---"
             if wget -q -nc --show-progress --progress=bar:force:noscroll $DL_URL ; then
                 echo "---Download complete---"
             else
