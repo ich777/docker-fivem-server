@@ -31,7 +31,7 @@ docker run --name FiveM -d \
     --env 'SRV_ADR=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/' \
     --env 'UID=99' \
     --env 'GID=100' \
-    --volume /mnt/user/appdata/fivem:/serverdata/serverfiles \
+    --volume /path/to/fivem:/serverdata/serverfiles \
     ich777/fivemserver
 ```
 
