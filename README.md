@@ -32,6 +32,7 @@ docker run --name FiveM -d \
     --env 'UID=99' \
     --env 'GID=100' \
     --volume /path/to/fivem:/serverdata/serverfiles \
+    --restart=unless-stopped \
     ich777/fivemserver
 ```
 
